@@ -14,15 +14,30 @@ const api = axios.create({
 
 const signup = async (name, email, password) => {
   try {
+    console.log('Sending signup request with:', { name, email });
     const response = await api.post('signup', {
       name,
       email,
       password,
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true
     });
+    console.log('Signup response:', response);
     return response.data;
   } catch (error) {
-    console.error('Signup error:', error.response?.data || error.message);
-    throw error;
+    const errorData = error.response?.data || error.message;
+    console.error('Signup error details:', {
+      message: error.message,
+      status: error.response?.status,
+      statusText: error.response?.statusText,
+      data: error.response?.data,
+      headers: error.response?.headers,
+      config: error.config
+    });
+    throw new Error(errorData?.message || 'Registration failed. Please try again.');
   }
 };
 
