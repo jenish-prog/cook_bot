@@ -1,16 +1,13 @@
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App.jsx';
+import AppWrapper from './AppWrapper';
 import './index.css';
 
-// Error boundary for the app
+// Simple error boundary for the app
 class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false };
-  }
+  state = { hasError: false };
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError() {
     return { hasError: true };
   }
 
@@ -29,7 +26,6 @@ class ErrorBoundary extends React.Component {
         </div>
       );
     }
-
     return this.props.children;
   }
 }
@@ -39,7 +35,7 @@ const root = createRoot(document.getElementById('root'));
 root.render(
   <StrictMode>
     <ErrorBoundary>
-      <App />
+      <AppWrapper />
     </ErrorBoundary>
   </StrictMode>
 );

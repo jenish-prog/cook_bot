@@ -1,6 +1,6 @@
 // src/pages/SignUpPage.jsx
 import React, { useState } from 'react';
-import authService from '../services/authService';
+import authService from '../services/authService.jsx';
 import { useNavigate, Link } from 'react-router-dom';
 
 const SignUp = () => {
